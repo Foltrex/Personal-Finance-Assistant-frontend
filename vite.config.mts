@@ -7,9 +7,6 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
-  const env = loadEnv(mode, process.cwd(), '');
-  const CONTEXT_PATH = env.VITE_CONTEXT_PATH;
-  
   return {
     plugins: [
       Vue({
@@ -33,7 +30,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         },
       })
     ],
-    base: `/${CONTEXT_PATH}/`,
     define: { 'process.env': {} },
     resolve: {
       alias: {
@@ -48,17 +44,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         '.tsx',
         '.vue',
       ],
-    },
-    server: {
-      headers: {
-        'Content-Type': 'text/css; charset=utf-8'
-      }
-    },
-
-    preview: {
-      headers: {
-        'Content-Type': 'text/css; charset=utf-8'
-      }
     }
   };
 })
