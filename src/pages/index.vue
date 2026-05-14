@@ -4,18 +4,28 @@ import type { Expense as ExpenseEntity } from "@/entities/Expense";
 import Expense from "@/components/Expense.vue";
 import AddExpenseForm from "@/components/AddExpenseForm.vue";
 import { apiFetch } from "@/utils/fetcher";
+import authService from "@/service/auth.service";
+import { useRouter } from "vue-router";
 
 const expenses = ref<ExpenseEntity[]>([]);
 
 const expenseFormOpen = ref(false);
 
+const router = useRouter();
+
 onMounted(() => {
   apiFetch<ExpenseEntity[]>('/expenses')
     .then(expensesObjs => expenses.value = expensesObjs)
 });
+
+const logout = async () => {
+  await authService.logout();
+  router.push('/login')
+}
 </script>
 
 <template>
+  <v-btn @click="logout">Logout</v-btn>
   <div class="d-flex flex-column align-center ma-4">
     <v-btn block rounded="xl" class="mt-16 text-title-large font-weight-medium" size="large" @click="() => expenseFormOpen = !expenseFormOpen">Add Expense
     </v-btn>
