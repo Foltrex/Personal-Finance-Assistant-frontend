@@ -2,7 +2,7 @@
 import apiService from '@/service/api.service';
 
 export interface User {
-    id: number;
+    id: string;
     username: string;
     role: string;
     authorities: string[];
@@ -11,8 +11,8 @@ export interface User {
 class AuthService {
     private currentUser: User | null = null;
     
-    register(credentials: { username: string; password: string; }): Promise<void> {
-        throw new Error('Method not implemented.');
+    async register(user: { name: string; username: string; email: string; password: string; }): Promise<void> {
+        await apiService.post('/api/auth/register', user);
     }
     
     async login(credentials: { username: string; password: string }): Promise<void> {

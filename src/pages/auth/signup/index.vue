@@ -7,11 +7,13 @@
                         Sign Up
                     </v-card-title>
                     <v-card-text>
-                        <v-text-field label="Username"></v-text-field>
-                        <v-text-field label="Password"></v-text-field>
+                        <v-text-field v-model="form.name" label="Name"></v-text-field>
+                        <v-text-field v-model="form.username" label="Username"></v-text-field>
+                        <v-text-field v-model="form.email" label="Email"></v-text-field>
+                        <v-text-field type="password" v-model="form.password" label="Password"></v-text-field>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn>
+                        <v-btn type="submit">
                             Register
                         </v-btn>
                     </v-card-actions>
@@ -33,11 +35,13 @@ const loading = ref(false);
 const errorMessage = ref('');
 
 const form = reactive({
+    name: '',
     username: '',
+    email: '',
     password: ''
 })
 
-const handleSignup = () => {
+const handleSignup = async () => {
     loading.value = true;
     errorMessage.value = '';
 

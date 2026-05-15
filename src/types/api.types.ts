@@ -3,3 +3,9 @@ export interface ApiError {
   status: number;
   timestamp?: string;
 }
+
+export interface Slice<T> {
+  content: T[];
+  hasNext: boolean;
+  nextCursor: Map<string, any>;
+}
